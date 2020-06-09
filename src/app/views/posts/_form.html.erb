@@ -1,0 +1,29 @@
+<%= form_with model: post, local: true do |f| %>
+
+    <% if post.errors.any? %>
+        <div>
+            <h2>There is <%= pluralize(post.errors.count, "error") %></h2>
+            <ul>
+                <% post.errors.full_messages.each do |err| %>
+                    <li><%= err %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+    </div>
+    <div>
+        <%= f.label :content %>
+        <%= f.text_area :content %>
+    </div>
+    <div>
+        <%= f.label :status %>
+        <%= f.select :status, [["Brouillon", false], ["Public", true]], selected: post.status ? post.status : false %>
+    </div>
+    <div>
+        <%= f.submit %>
+    </div>
+<% end %>
