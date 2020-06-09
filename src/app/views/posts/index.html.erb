@@ -1,0 +1,44 @@
+<p> <%= notice %> </p>
+
+<p>
+  <% if user_signed_in?  %>
+    Compté connecté : <%= current_user.email %>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+  <% else  %>
+    <%= link_to("Login", new_user_session_path) %>
+  <br>
+    <%= link_to("Inscription", new_user_registration_path) %>
+  <% end  %>
+</p>
+
+<h1>Posts</h1>
+
+<table>
+
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Status</th>
+      <th>Catégories</th>
+      <th colspan="3">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+    <tr>
+      <td> <%= post.title %> </td>
+      <td> <%= post.content %> </td>
+      <td> <%= post_categories_label(post.categories) %> </td>
+      <td> <%= post_status_label(post.status) %> </td>
+      <td> <%= link_to('Show', post) %> </td>
+      <td> <%= link_to('Edit', edit_post_path(post)) %> </td>
+      <td> <%= link_to('Destroy', post, method: :delete, data: { confirm: 'Supprimer ?' }) %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<%= link_to "New post", new_post_path %>
