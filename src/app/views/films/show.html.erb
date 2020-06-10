@@ -1,0 +1,12 @@
+<p>
+  <strong>Titre:</strong>
+  <%= @film.titre %>
+</p>
+
+<p>
+  <strong>Realisateur:</strong>
+  <%= @film.realisateur %>
+</p>
+
+<%= link_to 'Edit', edit_film_path(@film) %> |
+<%= link_to 'Back', films_path %>

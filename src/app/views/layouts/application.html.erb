@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
   </head>
 
   <body style="<%= "margin-left: 200px;" if current_user && current_user.has_role?(:admin) %>">
@@ -69,7 +70,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/comments">
+              <a class="nav-link" href="/films">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><path d="M7 2v20"/><path d="M17 2v20"/><path d="M2 12h20"/><path d="M2 7h5"/><path d="M2 17h5"/><path d="M17 17h5"/><path d="M17 7h5"/></></svg>
                 Films
               </a>

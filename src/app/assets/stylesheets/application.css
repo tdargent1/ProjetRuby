@@ -43,3 +43,13 @@ body {
 #sidebarMenu {
     margin-right: 150px;
 }
+/*
+*   generic 
+*/
+.counter-h1 {
+    float: right;
+    margin-bottom: 5px;
+}
+.counter-h1:hover {
+    color:white;
+}

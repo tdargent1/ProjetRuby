@@ -1,0 +1,30 @@
+<h1>Films</h1>
+<%= link_to  "New Film", new_film_path, class: 'counter-h1 btn btn-default' %>
+
+<table class="admin_table table table-striped table-bordered dataTable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Titre</th>
+            <th>Réalisateur</th>
+            <th>Created at</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @films.each do |film| %> 
+                <tr>
+                    <td> <%= link_to "##{film.id}", controller: "films", action: "edit", id: film.id %> </td>
+                    <td> <%= film.titre %> </td>
+                    <td> <%= film.realisateur %> </td>
+                    <td> <%= film.created_at %> </td>
+                    <td> 
+                      <a><%= link_to film_path(film), method: :delete, data: { confirm: 'T sur?'} do %> 
+                        <span class="iconify" data-icon="feather:trash-2" ></span>
+                      <% end %></a>
+                    </td>
+                </tr>
+        <% end %>
+    </tbody>
+
+</table>
