@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
-    before_action :set_user, only: [:show, :update, :destroy, :edit]
-    before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
+    before_action :set_user, except: [:index, :new, :create]
+    before_action :authenticate_user!, only: [:show, :edit, :update, :destroy, :respond_request]
   
     # GET /users
     def index
@@ -19,17 +19,12 @@ class UsersController < ApplicationController
   
     # GET /users/1/edit
     def edit
-
+        @actions = @user.user_actions
     end
   
   
     # PATCH/PUT /users/1
     def update
-      if @user.update(post_params)
-        redirect_to @user, notice: 'Profil updated'
-      else
-        render :edit
-      end
     end
   
     # DELETE /posts/1
@@ -37,6 +32,22 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to users_url, notice: "Account destroyed"
     end
+
+    def respond_request
+      user_action = UserAction.find(params[:user_action_id])
+      
+      if params[:accepted] == true
+        film = Film.find(user_action.film_id)
+        film.user_id = user_action.from_user_id
+        film.save!
+
+        user_action.accept!
+      else
+        user_action.refuse!
+      end
+      redirect_to edit_user_path + "#mes-actions"
+    end
+    
   
     private
   

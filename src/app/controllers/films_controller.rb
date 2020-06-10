@@ -1,6 +1,6 @@
 class FilmsController < ApplicationController
   before_action :set_film, only: [:show, :edit, :update, :destroy]
-  before_action :check_admin
+  before_action :check_admin, except: [:index]
 
   # GET /films
   # GET /films.json
