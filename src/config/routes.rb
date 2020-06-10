@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  root 'films#index'
+
   resources :films
-  root 'posts#index'
+  
 
   devise_for :users
   resources :categories
