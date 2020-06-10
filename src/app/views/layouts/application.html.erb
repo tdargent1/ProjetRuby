@@ -10,6 +10,44 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark standart_navbar">
+          <a class="navbar-brand" href="#">Salut à tous</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item <%= "active" if params[:controller] == "posts" %>">
+                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item <%= "active" if params[:controller] == "posts" %>">
+                <a class="nav-link" href="/posts">Posts</a>
+              </li>
+              <li class="nav-item <%= "active" if params[:controller] == "comments" %>">
+                <a class="nav-link" href="/comments">Commentaires</a>
+              </li>
+            </ul>
+
+            <ul class="navbar-nav navbar-right">
+              <% if user_signed_in? %>
+                <span class="navbar-text">
+                  <%= current_user.email %>
+                </span>
+                <li class="nav-item <%= "active" if params[:controller] == "users" %>">
+                  <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
+                </li>              
+              <% else %>
+                <li class="nav-item <%= "active" if params[:controller] == "users" %>">
+                  <a class="nav-link" href="/users/sign_up">Sign Up</a>
+                </li>
+                <li class="nav-item <%= "active" if params[:controller] == "users" %>">
+                  <a class="nav-link" href="/users/sign_in">Login</a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+    </nav>
+
     <% if notice %>
       <div class="alert alert-primary" role="alert">
         <%= notice %> 

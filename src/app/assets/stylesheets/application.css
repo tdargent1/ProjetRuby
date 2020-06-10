@@ -14,3 +14,7 @@
  *= require_tree .
  *= require_self
  */
+
+.standart_navbar {
+    margin-bottom: 100px;
+}
