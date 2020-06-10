@@ -1,0 +1,21 @@
+<div class="tab-pane" id="user_form">
+    <h4 class="col-sm-12">Vidéothèque</h4>
+    <table class="admin_table table table-striped table-bordered dataTable">
+        <thead>
+            <tr>
+                <th>Film</th>
+                <th>Titre</th>
+                <th>Réalisateur</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @user.films.each do |film| %>
+                <tr>
+                <td><%= link_to film.id, edit_film_path(film.id) %></td>
+                <td><%= film.titre %></td>
+                <td><%= film.realisateur %></td>
+            <% end %>
+        </tbody>
+    </table>
+</div>
