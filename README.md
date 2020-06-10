@@ -44,3 +44,8 @@ docker-compose exec app rails generate migration AddStatusToPost status:boolean
 ```
 docker-compose exec app rails generate scaffold Comment name:string message:text post:belongs_to
 ```
+
+# Doc Faker
+```
+https://github.com/faker-ruby/faker
+```
