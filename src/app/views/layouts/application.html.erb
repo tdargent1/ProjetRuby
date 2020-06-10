@@ -9,7 +9,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body style="<%= "margin-left: 200px;" if current_user && current_user.has_role?(:admin) %>">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark standart_navbar">
           <a class="navbar-brand" href="#">Salut à tous</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,15 +17,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item <%= "active" if params[:controller] == "posts" %>">
-                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item <%= "active" if params[:controller] == "posts" %>">
-                <a class="nav-link" href="/posts">Posts</a>
-              </li>
-              <li class="nav-item <%= "active" if params[:controller] == "comments" %>">
-                <a class="nav-link" href="/comments">Commentaires</a>
-              </li>
+              
             </ul>
 
             <ul class="navbar-nav navbar-right">
@@ -47,6 +39,45 @@
             </ul>
           </div>
     </nav>
+  
+    <% if current_user && current_user.has_role?(:admin) %>
+    <%
+=begin%>
+  pour les icones
+  https://iconify.design/icon-sets/feather/
+<%
+=end%>
+      <nav id="sidebarMenu" class="col-md-3 col-lg-1 d-md-block bg-light sidebar collapse">
+        <div class="sidebar-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Home <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/posts">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                Posts
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/comments">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></g></svg>
+                Comments
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/comments">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><path d="M7 2v20"/><path d="M17 2v20"/><path d="M2 12h20"/><path d="M2 7h5"/><path d="M2 17h5"/><path d="M17 17h5"/><path d="M17 7h5"/></></svg>
+                Films
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <% end %>
 
     <% if notice %>
       <div class="alert alert-primary" role="alert">
