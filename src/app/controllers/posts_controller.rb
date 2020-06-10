@@ -16,6 +16,9 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    if !current_user.has_role?(:admin)
+      redirect_to posts_path, alert: 'casse toi brigand'
+    end
     @post = Post.new
   end
 
