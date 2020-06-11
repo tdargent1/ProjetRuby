@@ -53,3 +53,15 @@ body {
 .counter-h1:hover {
     color:white;
 }
+#user_form {
+    margin-top: 70px;
+}
+#user_form h4 {
+    margin-bottom: 20px;
+}
+#mes-actions {
+    margin-top: 20px;
+}
+.card {
+    margin-top: 15px;
+}

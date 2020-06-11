@@ -1,0 +1,58 @@
+<div class="tab-pane" id="user_form">
+    <h4 class="col-sm-12">Vidéothèque</h4>
+
+    <ul class="nav nav-tabs" id="user-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="films-tab" data-toggle="tab" href="#mes-films" role="tab" aria-controls="mes-films" aria-selected="true">Mes films</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="actions-tab" data-toggle="tab" href="#mes-actions" role="tab" aria-controls="mes-actions" aria-selected="false">Mes actions</a>
+    </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="mes-films" role="tabpanel" aria-labelledby="films-tab">
+        <div class="tab-pane" id="mes-films">
+            <table class="admin_table table table-striped table-bordered dataTable">
+                <thead>
+                    <tr>
+                        <th>Film</th>
+                        <th>Titre</th>
+                        <th>Réalisateur</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% @user.films.each do |film| %>
+                        <tr>
+                        <td><%= link_to film.id, edit_film_path(film.id) %></td>
+                        <td><%= film.titre %></td>
+                        <td><%= film.realisateur %></td>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="mes-actions" role="tabpanel" aria-labelledby="actions-tab">
+        <div class="tab-pane active" id="mes-actions">
+            <% @actions.each do |a| %>
+                <% card = a.card_title(@user.id) %>
+                <div class="card text-white bg-<%=card[:status]%> mb-3">
+                    <div class="card-header">#<%= a.id %> <%= a.status_to_text %></div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= card[:title] %></h5>
+                        <p class="card-text"><i><%= Film.find(a.film_id).titre %></i>, <%= Film.find(a.film_id).realisateur %></p>
+                        
+                        <% if card[:requested_action] && current_user && current_user == @user && @user.id == a.to_user_id  %>
+                            <p><%= link_to 'Accepter', accept_request_user_path(@user, :user_action_id => a.id), class: "btn btn-success float-right", method: :put %></p>
+                            <p><%= link_to 'Refuser', refuse_request_user_path(@user, :user_action_id => a.id), class: "btn btn-danger float-right", style: "margin-right: 10px", method: :put %></p>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+            
+        </div>
+    </div>
+    </div>
+</div>
+
