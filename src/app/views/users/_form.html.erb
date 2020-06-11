@@ -61,25 +61,27 @@
         <% if current_user && current_user == @user && !@user.followings.empty? %>
             <div class="tab-pane fade" id="mes-abo" role="tabpanel" aria-labelledby="actions-tab">
                 <div class="tab-pane active" id="mes-abo">
-                    <% @user.followings.each do |f| %>
-                        <div class="container" >
-                            <div class="row">
-                                <div class="col-3">   
-                                    <h5 id="follower-name"><%= f.name %></h5>
-                                    <% f.user_actions.each do |a| %>
-                                        <% card = a.card_title(f.id) %>
-                                        <div class="card text-white bg-<%=card[:status]%> mb-3" style="width: 68rem;">
-                                            <div class="card-header">#<%= a.id %> <%= a.status_to_text %></div>
-                                            <div class="card-body">
-                                                <h5 class="card-title"><%= card[:title] %></h5>
-                                                <p class="card-text"><i><%= Film.find(a.film_id).titre %></i>, <%= Film.find(a.film_id).realisateur %></p>
+                    <div class="container" >
+                        <div class="row">
+                            <% @user.followings.each do |f| %> 
+                                <% if !f.user_actions.empty? %> 
+                                    <div class="col"> 
+                                        <h5 id="follower-name"><%= f.name %></h5>
+                                        <% f.user_actions.each do |a| %>
+                                            <% card = a.card_title(f.id) %>
+                                            <div class="card text-white bg-<%=card[:status]%> mb-3" style="width: 68rem;">
+                                                <div class="card-header">#<%= a.id %> <%= a.status_to_text %></div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><%= card[:title] %></h5>
+                                                    <p class="card-text"><i><%= Film.find(a.film_id).titre %></i>, <%= Film.find(a.film_id).realisateur %></p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    <% end %>
-                                </div>
-                            </div>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+                            <% end %>
                         </div>
-                    <% end %>
+                    </div>
                 </div>
             </div>
         <% end %>
