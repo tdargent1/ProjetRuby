@@ -26,16 +26,18 @@ class UserAction < ApplicationRecord
     def card_title(user_id)
         card_title = ""
         requested_action = false
-        
-        if self.from_user_id.nil?
-            card_title += "Vous avez ajouté un film à votre vidéothèque"
-        elsif self.to_user_id == user_id
-            card_title += self.waiting? ? User.find(from_user_id).name.to_s + " vous a envoyé une demande d'emprunt" : ( self.accepted? ? "Vous avez fait un prêt à " + User.find(from_user_id).name.to_s : "Vous avez refusé le prêt de " + User.find(from_user_id).name.to_s )
-            requested_action = true if self.waiting?
-        else
-            card_title += User.find(from_user_id).name.to_s
-            card_title += self.waiting? ? " est en attente de validation de votre demande de prêt" : ( self.accepted? ? " a validé votre demande de prêt" : " a refusé votre demande de prêt" )
+
+        if self.from_user_id == self.to_user_id
+            card_title += "#{User.find(self.to_user_id).name} a ajouté un film à sa vidéothèque"
+        elsif self.waiting?
+            card_title += "#{User.find(self.from_user_id).name} a fait une demande de prêt à #{User.find(self.to_user_id).name}"
+            requested_action = true;
+        elsif self.accepted?
+            card_title += "#{User.find(self.to_user_id).name} a fait un prêt à #{User.find(self.from_user_id).name}"
+        elsif self.refused?
+            card_title += "#{User.find(self.to_user_id).name} a refusé la demande de prêt de #{User.find(self.from_user_id).name}"
         end
+
         status = self.waiting? ? "warning" : ( self.accepted? ? "success" : ( self.refused? ? "danger" : "primary" ) )
 
         return {title: card_title, status: status, requested_action: requested_action}

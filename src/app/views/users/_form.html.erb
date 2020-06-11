@@ -38,14 +38,14 @@
             <% @actions.each do |a| %>
                 <% card = a.card_title(@user.id) %>
                 <div class="card text-white bg-<%=card[:status]%> mb-3">
-                    <div class="card-header"><%= a.status_to_text %></div>
+                    <div class="card-header">#<%= a.id %> <%= a.status_to_text %></div>
                     <div class="card-body">
                         <h5 class="card-title"><%= card[:title] %></h5>
                         <p class="card-text"><i><%= Film.find(a.film_id).titre %></i>, <%= Film.find(a.film_id).realisateur %></p>
-                        <% if card[:requested_action]  %>
-                            
-                            <p><%= link_to 'Accepter', respond_request_user_path(@user, :user_action_id => a.id, :accepted => true), class: "btn btn-success float-right", method: :put %></p>
-                            <p><%= link_to 'Refuser', respond_request_user_path(@user, :user_action_id => a.id, :accepted => false), class: "btn btn-danger float-right", style: "margin-right: 10px", method: :put %></p>
+                        
+                        <% if card[:requested_action] && current_user && current_user == @user && @user.id == a.to_user_id  %>
+                            <p><%= link_to 'Accepter', accept_request_user_path(@user, :user_action_id => a.id), class: "btn btn-success float-right", method: :put %></p>
+                            <p><%= link_to 'Refuser', refuse_request_user_path(@user, :user_action_id => a.id), class: "btn btn-danger float-right", style: "margin-right: 10px", method: :put %></p>
                         <% end %>
                     </div>
                 </div>

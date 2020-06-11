@@ -18,7 +18,7 @@
                     <td> <%= link_to "##{film.id}", controller: "films", action: "edit", id: film.id %> </td>
                     <td> <%= film.titre %> </td>
                     <td> <%= film.realisateur %> </td>
-                    <td> <%= User.find(film.user_id).name %> </td>
+                    <td> <%= link_to User.find(film.user_id).name, edit_user_path(film.user_id) if !film.user_id.nil? %> </td>
                     <td> <%= film.created_at %> </td>
                     <td> 
                       <a><%= link_to film_path(film), method: :delete, data: { confirm: 'T sur?'} do %> 

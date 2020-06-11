@@ -33,19 +33,29 @@ class UsersController < ApplicationController
       redirect_to users_url, notice: "Account destroyed"
     end
 
-    def respond_request
+    def accept_request
       user_action = UserAction.find(params[:user_action_id])
-      
-      if params[:accepted] == true
-        film = Film.find(user_action.film_id)
-        film.user_id = user_action.from_user_id
-        film.save!
 
-        user_action.accept!
-      else
-        user_action.refuse!
+      film = Film.find(user_action.film_id)
+      film.user_id = user_action.from_user_id
+      film.save!
+
+      user_action.accept!
+
+      respond_to do |format|
+        format.html { redirect_to edit_user_path, notice: "Tu as prêté #{film.titre} à #{User.find(user_action.from_user_id).name}" }
+        format.json { head :no_content }
       end
-      redirect_to edit_user_path + "#mes-actions"
+    end
+
+    def refuse_request
+      user_action = UserAction.find(params[:user_action_id])
+      user_action.refuse!
+      
+      respond_to do |format|
+        format.html { redirect_to edit_user_path, notice: "Tu as refusé la demande de prêt de #{User.find(user_action.from_user_id).name}" }
+        format.json { head :no_content }
+      end
     end
     
   
