@@ -11,6 +11,16 @@ class User < ApplicationRecord
   has_many :user_actions_from, class_name: "UserAction", foreign_key: "from_user_id"
   has_many :user_actions_to, class_name: "UserAction", foreign_key: "to_user_id"
 
+  # Will return an array of follows for the given user instance
+  has_many :received_follows, foreign_key: :followee_id, class_name: "Following"
+  # returns an array of follows a user gave to someone else
+  has_many :given_follows, foreign_key: :follower_id, class_name: "Following"
+
+  # Will return an array of users who follow the user instance
+  has_many :followers, through: :received_follows, source: :follower
+  # returns an array of other users who the user has followed
+  has_many :followings, through: :given_follows, source: :followed_user
+
   attr_writer :login
 
   def login

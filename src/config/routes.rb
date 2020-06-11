@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     member do
       put 'accept_request'
       put 'refuse_request'
+      put 'follow'
+      put 'unfollow'
     end
   end
 end

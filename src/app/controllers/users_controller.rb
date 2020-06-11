@@ -57,6 +57,32 @@ class UsersController < ApplicationController
         format.json { head :no_content }
       end
     end
+
+    def follow
+      Following.create(
+        follower_id: params[:follower_id],
+        followee_id: @user.id
+      ).save!
+
+      respond_to do |format|
+        format.html { redirect_to edit_user_path(@user) }
+        format.json { head :no_content }
+      end
+    end
+
+    def unfollow
+      f = Following.where(
+        :follower_id => params[:follower_id],
+        :followee_id => @user.id
+      ).last
+      
+      f.delete
+
+      respond_to do |format|
+        format.html { redirect_to edit_user_path(@user) }
+        format.json { head :no_content }
+      end
+    end
     
   
     private

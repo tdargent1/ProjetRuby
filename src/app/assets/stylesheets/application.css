@@ -65,3 +65,10 @@ body {
 .card {
     margin-top: 15px;
 }
+
+#follower-name {
+    margin-top: 25px;
+}
+#actions-following {
+    background-color: blue;
+}

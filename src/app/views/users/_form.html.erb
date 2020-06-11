@@ -8,51 +8,81 @@
     <li class="nav-item">
         <a class="nav-link" id="actions-tab" data-toggle="tab" href="#mes-actions" role="tab" aria-controls="mes-actions" aria-selected="false">Mes actions</a>
     </li>
+    <% if current_user && current_user == @user && !@user.followings.empty? %>
+        <li class="nav-item">
+            <a class="nav-link" id="actions-tab" data-toggle="tab" href="#mes-abo" role="tab" aria-controls="mes-abo" aria-selected="false">Mes abonnements</a>
+        </li>
+    <% end %>
     </ul>
 
     <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="mes-films" role="tabpanel" aria-labelledby="films-tab">
-        <div class="tab-pane" id="mes-films">
-            <table class="admin_table table table-striped table-bordered dataTable">
-                <thead>
-                    <tr>
-                        <th>Film</th>
-                        <th>Titre</th>
-                        <th>Réalisateur</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <% @user.films.each do |film| %>
+        <div class="tab-pane fade show active" id="mes-films" role="tabpanel" aria-labelledby="films-tab">
+            <div class="tab-pane" id="mes-films">
+                <table class="admin_table table table-striped table-bordered dataTable">
+                    <thead>
                         <tr>
-                        <td><%= link_to film.id, edit_film_path(film.id) %></td>
-                        <td><%= film.titre %></td>
-                        <td><%= film.realisateur %></td>
-                    <% end %>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="tab-pane fade" id="mes-actions" role="tabpanel" aria-labelledby="actions-tab">
-        <div class="tab-pane active" id="mes-actions">
-            <% @actions.each do |a| %>
-                <% card = a.card_title(@user.id) %>
-                <div class="card text-white bg-<%=card[:status]%> mb-3">
-                    <div class="card-header">#<%= a.id %> <%= a.status_to_text %></div>
-                    <div class="card-body">
-                        <h5 class="card-title"><%= card[:title] %></h5>
-                        <p class="card-text"><i><%= Film.find(a.film_id).titre %></i>, <%= Film.find(a.film_id).realisateur %></p>
-                        
-                        <% if card[:requested_action] && current_user && current_user == @user && @user.id == a.to_user_id  %>
-                            <p><%= link_to 'Accepter', accept_request_user_path(@user, :user_action_id => a.id), class: "btn btn-success float-right", method: :put %></p>
-                            <p><%= link_to 'Refuser', refuse_request_user_path(@user, :user_action_id => a.id), class: "btn btn-danger float-right", style: "margin-right: 10px", method: :put %></p>
+                            <th>Film</th>
+                            <th>Titre</th>
+                            <th>Réalisateur</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <% @user.films.each do |film| %>
+                            <tr>
+                            <td><%= link_to film.id, edit_film_path(film.id) %></td>
+                            <td><%= film.titre %></td>
+                            <td><%= film.realisateur %></td>
                         <% end %>
-                    </div>
-                </div>
-            <% end %>
-            
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+
+        <div class="tab-pane fade" id="mes-actions" role="tabpanel" aria-labelledby="actions-tab">
+            <div class="tab-pane active" id="mes-actions">
+                <% @actions.each do |a| %>
+                    <% card = a.card_title(@user.id) %>
+                    <div class="card text-white bg-<%=card[:status]%> mb-3">
+                        <div class="card-header">#<%= a.id %> <%= a.status_to_text %></div>
+                        <div class="card-body">
+                            <h5 class="card-title"><%= card[:title] %></h5>
+                            <p class="card-text"><i><%= Film.find(a.film_id).titre %></i>, <%= Film.find(a.film_id).realisateur %></p>
+
+                            <% if card[:requested_action] && current_user && current_user == @user && @user.id == a.to_user_id  %>
+                                <p><%= link_to 'Accepter', accept_request_user_path(@user, :user_action_id => a.id), class: "btn btn-success float-right", method: :put %></p>
+                                <p><%= link_to 'Refuser', refuse_request_user_path(@user, :user_action_id => a.id), class: "btn btn-danger float-right", style: "margin-right: 10px", method: :put %></p>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <% if current_user && current_user == @user && !@user.followings.empty? %>
+            <div class="tab-pane fade" id="mes-abo" role="tabpanel" aria-labelledby="actions-tab">
+                <div class="tab-pane active" id="mes-abo">
+                    <% @user.followings.each do |f| %>
+                        <div class="container" >
+                            <div class="row">
+                                <div class="col-3">   
+                                    <h5 id="follower-name"><%= f.name %></h5>
+                                    <% f.user_actions.each do |a| %>
+                                        <% card = a.card_title(f.id) %>
+                                        <div class="card text-white bg-<%=card[:status]%> mb-3" style="width: 68rem;">
+                                            <div class="card-header">#<%= a.id %> <%= a.status_to_text %></div>
+                                            <div class="card-body">
+                                                <h5 class="card-title"><%= card[:title] %></h5>
+                                                <p class="card-text"><i><%= Film.find(a.film_id).titre %></i>, <%= Film.find(a.film_id).realisateur %></p>
+                                            </div>
+                                        </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
     </div>
 </div>
 
