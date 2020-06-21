@@ -64,8 +64,13 @@ class FilmsController < ApplicationController
 
   def add
 
-    @film.user_id = params[:user_id]
-    @film.save!
+    ua = UserAction.new(
+      from_user_id: current_user.id,
+      to_user_id: current_user.id,
+      film_id: params[:id]
+    )
+    ua.save!
+    ua.accept!
 
     respond_to do |format|
       format.html { redirect_to @film, notice: 'Le film a été ajouté à ta collection.' }

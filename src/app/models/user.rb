@@ -28,7 +28,7 @@ class User < ApplicationRecord
   end
 
   def user_actions
-    return self.user_actions_to + self.user_actions_from
+    return (self.user_actions_to + self.user_actions_from).uniq
   end
 
   def self.find_for_database_authentication(warden_conditions)
