@@ -3,13 +3,17 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :films
-  resources :categories
-  resources :comments
-  resources :posts
-  
-  resources :users, only: [:edit] do
+  resources :films do 
     member do
+      put 'add'
+    end
+  end
+
+  resources :categories
+  
+  resources :users, only: [:edit, :destroy, :index] do
+    member do
+      put 'request_film'
       put 'accept_request'
       put 'refuse_request'
       put 'follow'

@@ -8,7 +8,7 @@
     <% if current_user != @user %>
         <% if !current_user.followings.include?(@user) %>
             <%= link_to  "Follow", follow_user_path(@user, :follower_id => current_user.id), class: "btn btn-info float-right float-top btn-follow", method: :put %>
-        <% else %>
+        <% elsif user_signed_in? %>
             <%= link_to  "Unfollow", unfollow_user_path(@user, :follower_id => current_user.id), class: "btn btn-outline-info float-right float-top btn-follow", method: :put %>
         <% end %>
     <% end %>

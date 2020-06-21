@@ -24,6 +24,9 @@
                             <th>Film</th>
                             <th>Titre</th>
                             <th>Réalisateur</th>
+                            <% if current_user != @user %>
+                            <th>Prêt</th>
+                            <% end %>
                         </tr>
                     </thead>
 
@@ -33,6 +36,9 @@
                             <td><%= link_to film.id, edit_film_path(film.id) %></td>
                             <td><%= film.titre %></td>
                             <td><%= film.realisateur %></td>
+                            <% if current_user != @user %>
+                            <td><%= link_to  "Emprunter", request_film_user_path(@user, :from_user_id => current_user.id, :to_user_id => @user.id, :film_id => film.id), class: "btn btn-info float-right float-top btn-follow", method: :put %></td>
+                            <% end %>
                         <% end %>
                     </tbody>
                 </table>

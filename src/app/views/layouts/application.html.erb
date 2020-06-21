@@ -10,9 +10,9 @@
     <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
   </head>
 
-  <body style="<%= "margin-left: 200px;" if current_user && current_user.has_role?(:admin) %>">
+  <body style="<%= "margin-left: 200px;" if user_signed_in? %>">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark standart_navbar">
-          <a class="navbar-brand" href="#">Salut à tous</a>
+          <a class="navbar-brand" href="/films">Salut à tous</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -41,7 +41,7 @@
           </div>
     </nav>
   
-    <% if current_user && current_user.has_role?(:admin) %>
+    <% if user_signed_in? %>
     <%
 =begin%>
   pour les icones
@@ -58,23 +58,19 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/posts">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                Posts
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/comments">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></g></svg>
-                Comments
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="/films">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><path d="M7 2v20"/><path d="M17 2v20"/><path d="M2 12h20"/><path d="M2 7h5"/><path d="M2 17h5"/><path d="M17 17h5"/><path d="M17 7h5"/></></svg>
                 Films
               </a>
             </li>
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link" href="/users">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><path d="M7 2v20"/><path d="M17 2v20"/><path d="M2 12h20"/><path d="M2 7h5"/><path d="M2 17h5"/><path d="M17 17h5"/><path d="M17 7h5"/></></svg>
+                Utilisateurs
+              </a>
+            </li>
+            <% end %>
           </ul>
         </div>
       </nav>

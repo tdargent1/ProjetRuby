@@ -1,6 +1,6 @@
 class FilmsController < ApplicationController
-  before_action :set_film, only: [:show, :edit, :update, :destroy]
-  before_action :check_admin, except: [:index]
+  before_action :set_film, only: [:show, :edit, :update, :destroy, :add]
+  before_action :check_admin, except: [:index, :show, :add]
 
   # GET /films
   # GET /films.json
@@ -58,6 +58,17 @@ class FilmsController < ApplicationController
     @film.destroy
     respond_to do |format|
       format.html { redirect_to films_url, notice: 'Film was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def add
+
+    @film.user_id = params[:user_id]
+    @film.save!
+
+    respond_to do |format|
+      format.html { redirect_to @film, notice: 'Le film a été ajouté à ta collection.' }
       format.json { head :no_content }
     end
   end

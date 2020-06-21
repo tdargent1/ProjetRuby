@@ -1,5 +1,8 @@
 <h1>Films</h1>
-<%= link_to  "New Film", new_film_path, class: 'counter-h1 btn btn-default' %>
+<% if (user_signed_in?) && (current_user.has_role?(:admin)) %>
+    <%= link_to  "New Film", new_film_path, class: 'counter-h1 btn btn-default' %>
+<% end %>
+
 
 <table class="admin_table table table-striped table-bordered dataTable">
     <thead>
@@ -9,22 +12,29 @@
             <th>Réalisateur</th>
             <th>Propriétaire</th>
             <th>Created at</th>
-            <th>Delete</th>
+            <% if (user_signed_in?) && (current_user.has_role?(:admin)) %>
+                <th>Delete</th>
+            <% end %>
         </tr>
     </thead>
     <tbody>
         <% @films.each do |film| %> 
                 <tr>
-                    <td> <%= link_to "##{film.id}", controller: "films", action: "edit", id: film.id %> </td>
+                    <td> <%= link_to "##{film.id}", controller: "films", action: "show", id: film.id %> </td>
                     <td> <%= film.titre %> </td>
                     <td> <%= film.realisateur %> </td>
-                    <td> <%= link_to User.find(film.user_id).name, edit_user_path(film.user_id) if !film.user_id.nil? %> </td>
-                    <td> <%= film.created_at %> </td>
                     <td> 
-                      <a><%= link_to film_path(film), method: :delete, data: { confirm: 'T sur?'} do %> 
-                        <span class="iconify" data-icon="feather:trash-2" ></span>
-                      <% end %></a>
+                    <%= link_to "Ajouter", add_film_path(film, :user_id => current_user.id), method: :put, class: 'counter-h1 btn btn-default' if film.user_id.nil? && user_signed_in? %>
+                    <%= link_to User.find(film.user_id).name, edit_user_path(film.user_id) if !film.user_id.nil? %> 
                     </td>
+                    <td> <%= film.created_at %> </td>
+                    <% if (user_signed_in?) && (current_user.has_role?(:admin)) %>
+                        <td> 
+                        <a><%= link_to film_path(film), method: :delete, data: { confirm: 'Es-tu sûr de vouloir supprimer ce film ?'} do %> 
+                            <span class="iconify" data-icon="feather:trash-2" ></span>
+                        <% end %></a>
+                        </td>
+                    <% end %>
                 </tr>
         <% end %>
     </tbody>
@@ -35,7 +45,9 @@
             <th>Réalisateur</th>
             <th>Propriétaire</th>
             <th>Created at</th>
-            <th>Delete</th>
+            <% if (user_signed_in?) && (current_user.has_role?(:admin)) %>
+                <th>Delete</th>
+            <% end %>
         </tr>
     </tfoot>
 
