@@ -57,6 +57,10 @@ en:
     already_asked_movie: "You already asked to %{user_name} to lent the movie !"
     lent_movie: "You lent %{film_title} to %{user_name}"
     refused_lent_movie: "You refused to lent to %{user_name}"
+    add_movie_to_library: "%{user_name} add a movie to his video lirary"
+    user_ask_lent_to_user: "%{from_user_name} ask to lent to %{to_user_name}"
+    user_lent_to_user: "%{to_user_name} lent to %{from_user_name}"
+    refused_lent_ask: "%{to_user_name} refused the loan request from %{from_user_name}"
   film:
     name: "Film"
     title: "Title"

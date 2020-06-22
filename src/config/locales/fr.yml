@@ -28,6 +28,10 @@ fr:
         already_asked_movie: "Tu as déjà demandé à %{user_name} de te prêter ce film !"
         lent_movie: "Tu as prêté %{film_title} à %{user_name}"
         refused_lent_movie: "Tu as refusé la demande de prêt de %{user_name}"
+        add_movie_to_library: "%{user_name} a ajouté un film à sa vidéothèque"
+        user_ask_lent_to_user: "%{from_user_name} a fait une demande de prêt à %{to_user_name}"
+        user_lent_to_user: "%{to_user_name} a fait un prêt à %{from_user_name}"
+        refused_lent_ask: "%{to_user_name} a refusé la demande de prêt de %{from_user_name}"
     film:
         name: "Film"
         title: "Titre"

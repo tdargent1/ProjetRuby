@@ -28,14 +28,23 @@ class UserAction < ApplicationRecord
         requested_action = false
 
         if self.from_user_id == self.to_user_id
-            card_title += "#{User.find(self.to_user_id).name} a ajouté un film à sa vidéothèque"
+            card_title += t('user.add_movie_to_library', user_name: User.find(self.to_user_id).name)
         elsif self.waiting?
-            card_title += "#{User.find(self.from_user_id).name} a fait une demande de prêt à #{User.find(self.to_user_id).name}"
+            card_title += t('user.user_ask_lent_to_user',
+                            from_user_name: User.find(self.from_user_id).name,
+                            to_user_name: User.find(self.to_user_id).name
+            )
             requested_action = true;
         elsif self.accepted?
-            card_title += "#{User.find(self.to_user_id).name} a fait un prêt à #{User.find(self.from_user_id).name}"
+            card_title += t('user.user_lent_to_user',
+                            to_user_name: User.find(self.to_user_id).name,
+                            from_user_name: User.find(self.from_user_id).name
+            )
         elsif self.refused?
-            card_title += "#{User.find(self.to_user_id).name} a refusé la demande de prêt de #{User.find(self.from_user_id).name}"
+            card_title += t('user.refused_lent_ask',
+                            to_user_name: User.find(self.to_user_id).name,
+                            from_user_name: User.find(self.from_user_id).name
+            )
         end
 
         status = self.waiting? ? "warning" : ( self.accepted? ? "success" : ( self.refused? ? "danger" : "primary" ) )
