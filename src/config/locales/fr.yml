@@ -57,3 +57,7 @@ fr:
         failure:
             user:
                 invalid: "%{authentication_keys} ou mot de passe invalide."
+    category:
+        created: 'La catégorie a été créée.'
+        update: 'La catégorie a été mise à jour.'
+        destroyed: 'La catégorie a été supprimée.'

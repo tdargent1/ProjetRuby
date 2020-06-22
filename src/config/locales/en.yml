@@ -78,3 +78,7 @@ en:
     films: "Films"
     users: "Users"
     home: "Home"
+  category:
+    created: 'Category was successfully created.'
+    update: 'Category was successfully updated.'
+    destroyed: 'Category was successfully destroyed.'
