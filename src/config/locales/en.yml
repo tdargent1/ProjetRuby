@@ -53,6 +53,10 @@ en:
     follow: "Follow"
     unfollow: "Unfollow"
     confirm_delete: "Are you sure you want to delete this user?"
+    have_been_deleted: 'User have been deleted.'
+    already_asked_movie: "You already asked to %{user_name} to lent the movie !"
+    lent_movie: "You lent %{film_title} to %{user_name}"
+    refused_lent_movie: "You refused to lent to %{user_name}"
   film:
     name: "Film"
     title: "Title"

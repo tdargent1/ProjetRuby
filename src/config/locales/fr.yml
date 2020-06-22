@@ -23,6 +23,11 @@ fr:
         follow: "Suivre"
         unfollow: "Ne plus suivre"
         confirm_delete: 'Es-tu sûr de vouloir supprimer cet utilisateur ?'
+        have_been_deleted : "L'utilisateur a été supprimé."
+        asked_to_an_user_a_movie: "Tu as demandé à %{user_name} de te prêter le film : %{film_title}"
+        already_asked_movie: "Tu as déjà demandé à %{user_name} de te prêter ce film !"
+        lent_movie: "Tu as prêté %{film_title} à %{user_name}"
+        refused_lent_movie: "Tu as refusé la demande de prêt de %{user_name}"
     film:
         name: "Film"
         title: "Titre"
@@ -49,6 +54,6 @@ fr:
             user:
                 signed_out: "Vous avez été déconnecté avec succès."
                 signed_in: "Connecté avec succès."
-        failure: 
+        failure:
             user:
                 invalid: "%{authentication_keys} ou mot de passe invalide."
