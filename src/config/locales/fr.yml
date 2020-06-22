@@ -1,0 +1,54 @@
+fr:
+    hello: "Salut à tous"
+    delete: "Supprimer"
+    page:
+        back: "Retour"
+        edit: "Editer"
+        show: "Voir"
+    user:
+        logout: "Déconnexion"
+        login_name: "Identifiant"
+        login: 'Connexion'
+        sign_up: "S'inscrire"
+        email: "Email"
+        password: "Mot de passe"
+        remember_me: "Se souvenir de moi"
+        forgot_password: "Mot de passe oublié ?"
+        no_confirmation_instrucitons: "Vous n'avez pas reçu les instructions de confirmation ?"
+        no_unlock_instructions: "Vous n'avez pas reçu les instructions de débloquage ?"
+        my_subscriptions: "Mes abonnements"
+        my_actions: "Mes actions"
+        my_films: "Mes films"
+        video_library: "Vidéothèque"
+        follow: "Suivre"
+        unfollow: "Ne plus suivre"
+        confirm_delete: 'Es-tu sûr de vouloir supprimer cet utilisateur ?'
+    film:
+        name: "Film"
+        title: "Titre"
+        director: "Réalisateur"
+        owner: "Propriétaire"
+        new: "Nouveau Film"
+        add: "Ajouter"
+        loan: "Prêt"
+        borrow: "Emprunter"
+        accept: "Accepter"
+        refuse: "Refuser"
+        confirm_delete: 'Es-tu sûr de vouloir supprimer ce film ?'
+        successfully_created: 'film créé avec succès.'
+        successfully_updated: 'Film mis à jour avec succès.'
+        successfully_destroyed: 'Film détruit avec succès.'
+        added_to_collection: 'Le film a été ajouté à ta collection.'
+        insufficient_rights: 'Tu ne peux pas acceder à cette page'
+    sidebar:
+        films: "Films"
+        users: "Utilisateurs"
+        home: "Accueil"
+    devise:
+        sessions:
+            user:
+                signed_out: "Vous avez été déconnecté avec succès."
+                signed_in: "Connecté avec succès."
+        failure: 
+            user:
+                invalid: "%{authentication_keys} ou mot de passe invalide."

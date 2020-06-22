@@ -4,9 +4,9 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Login</th>
+            <th><%= t('user.login') %></th>
             <% if (user_signed_in?) && (current_user.has_role?(:admin)) %>
-                <th>Delete</th>
+                <th><%= t('delete') %></th>
             <% end %>
         </tr>
     </thead>
@@ -17,7 +17,7 @@
                     <td> <%= user.name %> </td>
                     <% if (user_signed_in?) && (current_user.has_role?(:admin)) %>
                         <td style="width: 30px;"> 
-                        <a><%= link_to user_path(user), method: :delete, data: { confirm: 'Es-tu sûr de vouloir supprimer cet utilisateur ?'} do %> 
+                        <a><%= link_to user_path(user), method: :delete, data: { confirm: t('user.confirm_delete')} do %> 
                             <span class="iconify" data-icon="feather:trash-2" ></span>
                         <% end %></a>
                         </td>

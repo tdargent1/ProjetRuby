@@ -1,6 +1,6 @@
 <h1>Films</h1>
 <% if (user_signed_in?) && (current_user.has_role?(:admin)) %>
-    <%= link_to  "New Film", new_film_path, class: 'counter-h1 btn btn-default' %>
+    <%= link_to  t('film.new'), new_film_path, class: 'counter-h1 btn btn-default' %>
 <% end %>
 
 
@@ -8,12 +8,12 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Titre</th>
-            <th>Réalisateur</th>
-            <th>Propriétaire</th>
+            <th><%= t('film.title') %></th>
+            <th><%= t('film.director') %></th>
+            <th><%= t('film.owner') %></th>
             <th>Created at</th>
             <% if (user_signed_in?) && (current_user.has_role?(:admin)) %>
-                <th>Delete</th>
+                <th><%= t('delete') %></th>
             <% end %>
         </tr>
     </thead>
@@ -24,13 +24,13 @@
                     <td> <%= film.titre %> </td>
                     <td> <%= film.realisateur %> </td>
                     <td> 
-                    <%= link_to "Ajouter", add_film_path(film, :user_id => current_user.id), method: :put, class: 'counter-h1 btn btn-default' if film.user_id.nil? && user_signed_in? %>
+                    <%= link_to t('film.add') , add_film_path(film, :user_id => current_user.id), method: :put, class: 'counter-h1 btn btn-default' if film.user_id.nil? && user_signed_in? %>
                     <%= link_to User.find(film.user_id).name, edit_user_path(film.user_id) if !film.user_id.nil? %> 
                     </td>
                     <td> <%= film.created_at %> </td>
                     <% if (user_signed_in?) && (current_user.has_role?(:admin)) %>
                         <td> 
-                        <a><%= link_to film_path(film), method: :delete, data: { confirm: 'Es-tu sûr de vouloir supprimer ce film ?'} do %> 
+                        <a><%= link_to film_path(film), method: :delete, data: { confirm: t('film.confirm_delete')} do %> 
                             <span class="iconify" data-icon="feather:trash-2" ></span>
                         <% end %></a>
                         </td>
@@ -41,12 +41,12 @@
     <tfoot>
         <tr>
             <th>#</th>
-            <th>Titre</th>
-            <th>Réalisateur</th>
-            <th>Propriétaire</th>
+            <th><%= t('film.title') %></th>
+            <th><%= t('film.director') %></th>
+            <th><%= t('film.owner') %></th>
             <th>Created at</th>
             <% if (user_signed_in?) && (current_user.has_role?(:admin)) %>
-                <th>Delete</th>
+                <th><%= t('delete') %></th>
             <% end %>
         </tr>
     </tfoot>
