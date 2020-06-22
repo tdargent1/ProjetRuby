@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to films_path, notice: t(
-            'asked_to_an_user_a_movie',
+            'user.asked_to_an_user_a_movie',
             user_name: User.find(user_action.to_user_id).name,
             film_title: Film.find(user_action.film_id).titre
         ) }
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to films_path, alert: t(
-            'already_asked_movie',
+            'user.already_asked_movie',
             user_name: User.find(params[:to_user_id]).name
         ) }
         format.json { head :no_content }
@@ -88,7 +88,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to edit_user_path, notice: t(
-          'lent_movie',
+          'user.lent_movie',
           film_title: film.titre,
           user_name: User.find(user_action.from_user_id).name
       ) }
@@ -102,7 +102,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to edit_user_path, notice: t(
-          'refused_lent_movie',
+          'user.refused_lent_movie',
           user_name: User.find(user_action.from_user_id).name
       ) }
       format.json { head :no_content }
@@ -142,4 +142,3 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 end
-    
