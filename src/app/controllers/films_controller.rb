@@ -29,7 +29,7 @@ class FilmsController < ApplicationController
 
     respond_to do |format|
       if @film.save
-        format.html { redirect_to @film, notice: 'Film was successfully created.' }
+        format.html { redirect_to @film, notice: t('film.successfully_created') }
         format.json { render :show, status: :created, location: @film }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class FilmsController < ApplicationController
   def update
     respond_to do |format|
       if @film.update(film_params)
-        format.html { redirect_to @film, notice: 'Film was successfully updated.' }
+        format.html { redirect_to @film, notice: t('film.successfully_updated') }
         format.json { render :show, status: :ok, location: @film }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class FilmsController < ApplicationController
   def destroy
     @film.destroy
     respond_to do |format|
-      format.html { redirect_to films_url, notice: 'Film was successfully destroyed.' }
+      format.html { redirect_to films_url, notice: t('film.successfully_destroyed.') }
       format.json { head :no_content }
     end
   end
@@ -73,7 +73,7 @@ class FilmsController < ApplicationController
     ua.accept!
 
     respond_to do |format|
-      format.html { redirect_to @film, notice: 'Le film a été ajouté à ta collection.' }
+      format.html { redirect_to @film, notice: t('film.added_to_collection') }
       format.json { head :no_content }
     end
   end
@@ -92,7 +92,7 @@ class FilmsController < ApplicationController
     def check_admin
       if !current_user || !current_user.has_role?(:admin)
         respond_to do |format|
-          format.html { redirect_to '/', alert: 'Tu ne peux pas acceder à cette page' }
+          format.html { redirect_to '/', alert: t('page.insufficient_rights') }
           format.json { head :no_content }
         end
       end

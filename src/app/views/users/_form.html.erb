@@ -1,16 +1,16 @@
 <div class="tab-pane" id="user_form">
-    <h4 class="col-sm-12">Vidéothèque</h4>
+    <h4 class="col-sm-12"><%= t('user.video_library') %></h4>
 
     <ul class="nav nav-tabs" id="user-tab" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="films-tab" data-toggle="tab" href="#mes-films" role="tab" aria-controls="mes-films" aria-selected="true">Mes films</a>
+        <a class="nav-link active" id="films-tab" data-toggle="tab" href="#mes-films" role="tab" aria-controls="mes-films" aria-selected="true"><%= t('user.my_films') %></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="actions-tab" data-toggle="tab" href="#mes-actions" role="tab" aria-controls="mes-actions" aria-selected="false">Mes actions</a>
+        <a class="nav-link" id="actions-tab" data-toggle="tab" href="#mes-actions" role="tab" aria-controls="mes-actions" aria-selected="false"><%= t('user.my_actions') %></a>
     </li>
     <% if current_user && current_user == @user && !@user.followings.empty? %>
         <li class="nav-item">
-            <a class="nav-link" id="actions-tab" data-toggle="tab" href="#mes-abo" role="tab" aria-controls="mes-abo" aria-selected="false">Mes abonnements</a>
+            <a class="nav-link" id="actions-tab" data-toggle="tab" href="#mes-abo" role="tab" aria-controls="mes-abo" aria-selected="false"><%= t('user.my_subscriptions') %></a>
         </li>
     <% end %>
     </ul>
@@ -21,11 +21,11 @@
                 <table class="admin_table table table-striped table-bordered dataTable">
                     <thead>
                         <tr>
-                            <th>Film</th>
-                            <th>Titre</th>
-                            <th>Réalisateur</th>
+                            <th><%= t('film.name') %></th>
+                            <th><%= t('film.title') %></th>
+                            <th><%= t('film.director') %></th>
                             <% if current_user != @user %>
-                            <th>Prêt</th>
+                            <th><%= t('film.loan') %></th>
                             <% end %>
                         </tr>
                     </thead>
@@ -37,7 +37,7 @@
                             <td><%= film.titre %></td>
                             <td><%= film.realisateur %></td>
                             <% if current_user != @user %>
-                            <td><%= link_to  "Emprunter", request_film_user_path(@user, :from_user_id => current_user.id, :to_user_id => @user.id, :film_id => film.id), class: "btn btn-info float-right float-top btn-follow", method: :put %></td>
+                            <td><%= link_to  t('film.borrow'), request_film_user_path(@user, :from_user_id => current_user.id, :to_user_id => @user.id, :film_id => film.id), class: "btn btn-info float-right float-top btn-follow", method: :put %></td>
                             <% end %>
                         <% end %>
                     </tbody>
@@ -56,8 +56,8 @@
                             <p class="card-text"><i><%= Film.find(a.film_id).titre %></i>, <%= Film.find(a.film_id).realisateur %></p>
 
                             <% if card[:requested_action] && current_user && current_user == @user && @user.id == a.to_user_id  %>
-                                <p><%= link_to 'Accepter', accept_request_user_path(@user, :user_action_id => a.id), class: "btn btn-success float-right", method: :put %></p>
-                                <p><%= link_to 'Refuser', refuse_request_user_path(@user, :user_action_id => a.id), class: "btn btn-danger float-right", style: "margin-right: 10px", method: :put %></p>
+                                <p><%= link_to t('film.accept'), accept_request_user_path(@user, :user_action_id => a.id), class: "btn btn-success float-right", method: :put %></p>
+                                <p><%= link_to t('film.refuse'), refuse_request_user_path(@user, :user_action_id => a.id), class: "btn btn-danger float-right", style: "margin-right: 10px", method: :put %></p>
                             <% end %>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                                         <h5 id="follower-name"><%= f.name %></h5>
                                         <% f.user_actions.each do |a| %>
                                             <% card = a.card_title(f.id) %>
-                                            <div class="card text-white bg-<%=card[:status]%> mb-3" style="width: 68rem;">
+                                            <div class="card text-white bg-<%=card[:status]%> mb-3">
                                                 <div class="card-header">#<%= a.id %> <%= a.status_to_text %></div>
                                                 <div class="card-body">
                                                     <h5 class="card-title"><%= card[:title] %></h5>
