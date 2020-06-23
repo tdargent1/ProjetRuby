@@ -64,11 +64,16 @@ class FilmsController < ApplicationController
 
   def add
 
+    film = Film.find params[:id]
+
     ua = UserAction.new(
       from_user_id: current_user.id,
       to_user_id: current_user.id,
-      film_id: params[:id]
+      film_id: film.id
     )
+    film.user_id = current_user.id
+    film.save!
+
     ua.save!
     ua.accept!
 

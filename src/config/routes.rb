@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       put 'refuse_request'
       put 'follow'
       put 'unfollow'
+      put 'give_admin'
+      put 'retrieve_admin'
     end
   end
 end

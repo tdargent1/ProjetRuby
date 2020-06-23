@@ -53,6 +53,11 @@ en:
     follow: "Follow"
     unfollow: "Unfollow"
     confirm_delete: "Are you sure you want to delete this user?"
+<<<<<<< Updated upstream
+=======
+    give_admin: "Give admin rights"
+    retrieve_admin: "Retrieve admin rights"
+>>>>>>> Stashed changes
   film:
     name: "Film"
     title: "Title"

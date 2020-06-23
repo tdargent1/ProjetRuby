@@ -23,6 +23,11 @@ fr:
         follow: "Suivre"
         unfollow: "Ne plus suivre"
         confirm_delete: 'Es-tu sûr de vouloir supprimer cet utilisateur ?'
+<<<<<<< Updated upstream
+=======
+        give_admin: "Donner les droits administrateurs"
+        retrieve_admin: "Retirer les droits administrateurs"
+>>>>>>> Stashed changes
     film:
         name: "Film"
         title: "Titre"
